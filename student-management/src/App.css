@@ -33,6 +33,8 @@ form {
 }
 
 input[type="text"],
+input[type="number"],
+input[type="email"],
 select {
   padding: 10px;
   margin: 10px 0;
@@ -67,6 +69,24 @@ button.cancel:hover {
   background-color: #c82333;
 }
 
+button.more {
+  background-color: #3bbbe2;
+  color: white;
+}
+
+button.more:hover {
+  background-color: #27bfe1;
+}
+
+button.edit {
+  background-color: #3ce068;
+  color: white;
+}
+
+button.edit:hover {
+  background-color: #27e140;
+}
+
 .student-list {
   margin-top: 20px;
 }
@@ -84,4 +104,47 @@ button.cancel:hover {
 
 .student-item button {
   margin-left: 10px;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.modal-header h3 {
+  margin: 0;
+}
+
+.modal-close {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #aaa;
+}
+
+.modal-close:hover {
+  color: #777;
 }
