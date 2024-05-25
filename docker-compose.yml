@@ -9,7 +9,7 @@ services:
     depends_on:
       - api
     build:
-      context: ./student-management
+      context: ./VDT_Lab_Frontend
       dockerfile: Dockerfile
       args:
         - REACT_APP_API_BASE_URL=$CLIENT_API_BASE_URL
@@ -18,13 +18,13 @@ services:
     networks:
       - frontend
     volumes:
-      - ./student-management:/src/app
+      - ./VDT_Lab_Frontend:/src/app
     
   api:
     depends_on:
       - db
     build:
-      context: ./api
+      context: ./VDT_Lab_Backend
       dockerfile: Dockerfile
     env_file:
       - ./.env
@@ -41,7 +41,7 @@ services:
       - backend
       - frontend
     volumes:
-      - ./api:/src/app
+      - ./VDT_Lab_Backend:/src/app
   
 
   db:
