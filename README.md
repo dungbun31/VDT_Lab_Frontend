@@ -1,1 +1,0 @@
-# VDT_Lab_Frontend
