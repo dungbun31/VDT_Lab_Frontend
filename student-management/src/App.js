@@ -3,12 +3,16 @@ import "./App.css";
 import StudentForm from "./components/StudentForm";
 import StudentList from "./components/StudentList";
 import UpdateStudent from "./components/UpdateStudent";
+import StudentDetails from "./components/StudentDetails"; // Import the modal component
 
 const App = () => {
   const [students, setStudents] = useState([]);
   const [editingStudent, setEditingStudent] = useState(null);
   const [showUpdatePage, setShowUpdatePage] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState(null); // State for selected student
+  const [showDetailsModal, setShowDetailsModal] = useState(false); // State for modal visibility
 
+  // Change the apiUrl to match the environment variable or default to localhost
   const apiUrl =
     process.env.REACT_APP_API_BASE_URL || "http://localhost:8080/api";
 
@@ -86,6 +90,16 @@ const App = () => {
     }
   };
 
+  const showDetails = (student) => {
+    setSelectedStudent(student);
+    setShowDetailsModal(true);
+  };
+
+  const closeModal = () => {
+    setShowDetailsModal(false);
+    setSelectedStudent(null);
+  };
+
   return (
     <div className="container">
       {showUpdatePage ? (
@@ -101,7 +115,11 @@ const App = () => {
             students={students}
             editStudent={editStudent}
             deleteStudent={deleteStudent}
+            showDetails={showDetails} 
           />
+          {showDetailsModal && selectedStudent && (
+            <StudentDetails student={selectedStudent} closeModal={closeModal} />
+          )}
         </>
       )}
     </div>
