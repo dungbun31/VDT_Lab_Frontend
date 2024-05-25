@@ -6,10 +6,8 @@ networks:
    
 services:
   web:
-    depends_on:
-      - api
     build:
-      context: ./VDT_Lab_Frontend
+      context: ./student-management
       dockerfile: Dockerfile
       args:
         - REACT_APP_API_BASE_URL=$CLIENT_API_BASE_URL
@@ -18,47 +16,7 @@ services:
     networks:
       - frontend
     volumes:
-      - ./VDT_Lab_Frontend:/src/app
-    
-  api:
-    depends_on:
-      - db
-    build:
-      context: ./VDT_Lab_Backend
-      dockerfile: Dockerfile
-    env_file:
-      - ./.env
-    environment:
-      - DB_HOST=${DB_HOST}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASS}
-      - DB_NAME=${DB_NAME}
-      - DB_PORT=${DB_PORT}
-      - CLIENT_ORIGIN=$CLIENT_ORIGIN
-    ports:
-      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
-    networks:
-      - backend
-      - frontend
-    volumes:
-      - ./VDT_Lab_Backend:/src/app
-  
-
-  db:
-    image: postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    env_file:
-    - ./.env
-    environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
-      - POSTGRES_DB=${DB_NAME}
-    ports:
-      - $DB_LOCAL_PORT:$DB_PORT
-    networks:
-      - backend
-
+      - ./student-management:/src/app
 
 volumes:
   postgres_data:
