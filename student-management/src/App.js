@@ -14,7 +14,7 @@ const App = () => {
 
   // Change the apiUrl to match the environment variable or default to localhost
   const apiUrl =
-    process.env.REACT_APP_API_BASE_URL || "http://localhost:8080/api";
+    process.env.REACT_APP_API_BASE_URL;
 
   const fetchStudents = useCallback(async () => {
     try {
