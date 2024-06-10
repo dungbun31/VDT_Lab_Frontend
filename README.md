@@ -1,3 +1,21 @@
+# React.js CRUD App with React
+
+## Project setup
+
+In the project directory, you can run:
+
+```
+npm install
+```
+
+or
+
+### Compiles and hot-reloads for development
+
+```
+npm start
+```
+
 # Docker Compose React and Nodejs with Nginx example
 
 Dockerize fullstack: React, Nodejs Express and Postgresql example using Docker Compose with Nginx.

@@ -7,16 +7,30 @@ networks:
 services:
   web:
     build:
-      context: ./student-management
+      context: .
       dockerfile: Dockerfile
-      args:
-        - REACT_APP_API_BASE_URL=$CLIENT_API_BASE_URL
     ports:
-      - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+      - 3000
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: always
     networks:
       - frontend
     volumes:
-      - ./student-management:/src/app
+      - .:/src/app
+  
+  nginx:
+    image: nginx
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - web    
+    networks:
+      - frontend
 
 volumes:
   postgres_data:
