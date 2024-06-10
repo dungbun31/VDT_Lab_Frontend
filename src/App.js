@@ -9,13 +9,12 @@ const App = () => {
   const [students, setStudents] = useState([]);
   const [editingStudent, setEditingStudent] = useState(null);
   const [showUpdatePage, setShowUpdatePage] = useState(false);
-  const [selectedStudent, setSelectedStudent] = useState(null); // State for selected student
-  const [showDetailsModal, setShowDetailsModal] = useState(false); // State for modal visibility
+  const [selectedStudent, setSelectedStudent] = useState(null); 
+  const [showDetailsModal, setShowDetailsModal] = useState(false); 
 
-  // Change the apiUrl to match the environment variable or default to localhost
-  const apiUrl =
-    process.env.REACT_APP_API_BASE_URL;
-
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
+  
+  console.log("url", apiUrl);
   const fetchStudents = useCallback(async () => {
     try {
       const response = await fetch(`${apiUrl}/api/students`);
