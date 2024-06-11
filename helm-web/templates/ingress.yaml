@@ -23,7 +23,7 @@ spec:
             pathType: {{ .pathType }}
             backend:
               service:
-                name: {{ include "helm-web.fullname" $. }}
+                name: {{ include "helm-web.fullname" $ }}
                 port:
                   number: {{ $.Values.service.port }}
           {{- end }}
