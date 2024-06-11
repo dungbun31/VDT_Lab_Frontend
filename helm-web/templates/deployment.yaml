@@ -25,6 +25,7 @@ spec:
           mountPath: /src/app
       - name: nginx-container
         image: "{{ .Values.image.nginx.registry }}/{{ .Values.image.nginx.repository }}:{{ .Values.image.nginx.tag }}"
+        imagePullPolicy: {{ .Values.image.nginx.pullPolicy }}
         ports:
         - containerPort: 80
         volumeMounts:
@@ -38,3 +39,18 @@ spec:
       - name: nginx-config
         configMap:
           name: nginx-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-nginx
+  labels:
+    app: {{ .Release.Name }}-nginx
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ .Release.Name }}-web
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: {{ .Values.service.nodePort }}
