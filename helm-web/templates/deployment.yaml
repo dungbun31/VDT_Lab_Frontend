@@ -1,37 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.nameOverride | default .Chart.Name }}
+  name: {{ .Release.Name }}-web
   labels:
-    app: {{ .Values.nameOverride | default .Chart.Name }}
+    app: {{ .Release.Name }}-web
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.nameOverride | default .Chart.Name }}
+      app: {{ .Release.Name }}-web
   template:
     metadata:
       labels:
-        app: {{ .Values.nameOverride | default .Chart.Name }}
+        app: {{ .Release.Name }}-web
     spec:
       containers:
-      - name: {{ .Values.nameOverride | default .Chart.Name }}
-        image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+      - name: web-container
+        image: "{{ .Values.image.web.registry }}/{{ .Values.image.web.repository }}:{{ .Values.image.web.tag }}"
+        imagePullPolicy: {{ .Values.image.web.pullPolicy }}
         ports:
-        - containerPort: {{ .Values.service.port }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ .Values.nameOverride | default .Chart.Name }}
-  labels:
-    app: {{ .Values.nameOverride | default .Chart.Name }}
-spec:
-  type: {{ .Values.service.type }}
-  ports:
-    - port: {{ .Values.service.port }}
-      targetPort: 3000
-      nodePort: {{ .Values.service.nodePort }}
-  selector:
-    app: {{ .Values.nameOverride | default .Chart.Name }}
+        - containerPort: 3000
+        volumeMounts:
+        - name: app-volume
+          mountPath: /src/app
+      - name: nginx-container
+        image: "{{ .Values.image.nginx.registry }}/{{ .Values.image.nginx.repository }}:{{ .Values.image.nginx.tag }}"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+      volumes:
+      - name: app-volume
+        hostPath:
+          path: /src/app
+      - name: nginx-config
+        configMap:
+          name: nginx-config
