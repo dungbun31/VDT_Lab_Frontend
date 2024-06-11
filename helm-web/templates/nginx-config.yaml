@@ -10,14 +10,14 @@ data:
     }
 
     http {
-        upstream all {
-            server web:3000;
+        upstream web-backend {
+            server {{ include "helm-web.fullname" . }}-web:3000;
         }
 
         server {
             listen 80;
             location / {
-                proxy_pass http://all;
+                proxy_pass http://web-backend;
             }
         }
     }
