@@ -23,19 +23,21 @@ spec:
         volumeMounts:
         - name: app-volume
           mountPath: /src/app
-      - name: nginx-container
-        image: "{{ .Values.image.nginx.registry }}/{{ .Values.image.nginx.repository }}:{{ .Values.image.nginx.tag }}"
-        imagePullPolicy: {{ .Values.image.nginx.pullPolicy }}
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: nginx-config
-          mountPath: /etc/nginx/nginx.conf
-          subPath: nginx.conf
       volumes:
       - name: app-volume
         hostPath:
           path: /src/app
-      - name: nginx-config
-        configMap:
-          name: nginx-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-web
+  labels:
+    app: {{ .Release.Name }}-web
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ .Release.Name }}-web
+  ports:
+    - port: 3000
+      targetPort: 3000
