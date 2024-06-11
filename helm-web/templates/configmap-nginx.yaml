@@ -11,7 +11,7 @@ data:
 
     http {
         upstream web-backend {
-            server {{ include "helm-web.fullname" . }}-web:3000;
+            server {{ include "helm-web.fullname" . }}:3000;
         }
 
         server {
