@@ -6,7 +6,7 @@ variables:
   DOCKER_IMAGE: "dungxbuns/vdt-lab-frontend"
   DOCKER_TLS_CERTDIR: ""
 
-image: ubuntu-latest
+image: ubuntu:latest
 
 services:
   - docker:19.03.12-dind
