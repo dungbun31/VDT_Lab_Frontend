@@ -57,10 +57,6 @@ deploy:
       echo "New tag: $NEW_TAG"
     - pip3 install -r requirements.txt
     - python3 config.py
-    - git config --global user.email "gitlab-ci@your-domain.com"
-    - git config --global user.name "GitLab CI"
-    - git add values.yaml
-    - git commit -m "Update image tag to $NEW_TAG"
     - git push origin main
   only:
     refs:
