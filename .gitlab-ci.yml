@@ -60,7 +60,7 @@ deploy:
     - git config --global user.name "GitLab CI"
     - git add values.yaml
     - git commit -m "Update image tag to $NEW_TAG"
-    - git push origin main
+    - git push https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/dungbun31/ks8-config-web.git main
   only:
     refs:
       - develop
