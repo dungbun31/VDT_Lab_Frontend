@@ -51,7 +51,7 @@ deploy:
   script:
     - export $(cat .env | xargs)
     - git clone https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/dungbun31/ks8-config-web.git
-    - cd ks8-config-web
+    - cd ks8-config-api
     - |
       echo "New tag: $NEW_TAG"
     - pip3 install -r requirements.txt
@@ -65,4 +65,5 @@ deploy:
     refs:
       - develop
       - merge_requests
+
 
