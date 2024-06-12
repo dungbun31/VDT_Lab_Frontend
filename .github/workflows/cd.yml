@@ -109,4 +109,4 @@ jobs:
           git commit -m "Update image tag to ${{ env.NEW_TAG }}"
           git push
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
