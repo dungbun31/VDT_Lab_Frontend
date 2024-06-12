@@ -19,7 +19,6 @@ before_script:
   - apt-get update
   - apt-get install -y docker-ce docker-ce-cli containerd.io
   - service docker start
-  - docker info
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
 build:
