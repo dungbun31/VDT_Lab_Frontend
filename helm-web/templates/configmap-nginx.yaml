@@ -11,7 +11,7 @@ data:
 
     http {
         upstream web-backend {
-            server {{ .Release.Name }}-web:3000;
+            server web:3000;
         }
 
         server {
