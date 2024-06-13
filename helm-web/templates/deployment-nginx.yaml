@@ -55,3 +55,4 @@ spec:
     - port: 80
       targetPort: 80
       nodePort: {{ .Values.nginxService.nodePort }}
+      name: http
