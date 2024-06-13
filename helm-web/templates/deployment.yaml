@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-web
+  name: web
   labels:
-    app: {{ .Release.Name }}-web
+    app: web
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-web
+      app: web
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-web
+        app: web
     spec:
       containers:
       - name: web-container
