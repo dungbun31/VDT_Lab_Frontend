@@ -39,18 +39,4 @@ spec:
       - name: app-volume
         hostPath:
           path: /src/app
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ .Release.Name }}-web
-  labels:
-    app: {{ .Release.Name }}-web
-spec:
-  type: {{ .Values.service.type }}
-  selector:
-    app: {{ .Release.Name }}-web
-  ports:
-    - port: 3000
-      targetPort: 3000
-      name: http
+
