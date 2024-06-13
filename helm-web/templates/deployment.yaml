@@ -35,6 +35,13 @@ spec:
             port: 3000
           initialDelaySeconds: 30
           periodSeconds: 10
+      - name: haproxy
+        image: haproxy:latest
+        volumeMounts:
+        - mountPath: /usr/local/etc/haproxy/haproxy.cfg
+          subPath: haproxy.cfg
+        - mountPath: /etc/ssl/certs
+          name: ssl-certs
       volumes:
       - name: app-volume
         hostPath:

@@ -36,6 +36,13 @@ spec:
             port: 80
           initialDelaySeconds: 30
           periodSeconds: 10
+      - name: haproxy
+        image: haproxy:latest
+        volumeMounts:
+        - mountPath: /usr/local/etc/haproxy/haproxy.cfg
+          subPath: haproxy.cfg
+        - mountPath: /etc/ssl/certs
+          name: ssl-certs
       volumes:
       - name: nginx-config
         configMap:
